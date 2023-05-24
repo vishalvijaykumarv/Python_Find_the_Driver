@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Uber Driver System Clone</title>
+</head>
+
+<body>
+    <h1>Uber Driver System Clone</h1>
+    <p>This Flask app is a clone of the Uber driver system. It provides a set of APIs for managing drivers, rides, and their status. Below you will find the details of the available endpoints and their functionalities.</p>
+
+    <h2>Endpoints</h2>
+
+    <h3>GET /check_db_connection</h3>
+    <ul>
+        <li><strong>Description:</strong> Returns the status of the database connection.</li>
+    </ul>
+
+    <h3>GET /next_que</h3>
+    <ul>
+        <li><strong>Description:</strong> Displays the ride queue in the user interface (UI).</li>
+    </ul>
+
+    <h3>GET /active_rides</h3>
+    <ul>
+        <li><strong>Description:</strong> Displays the list of active rides in the UI.</li>
+    </ul>
+
+    <h3>GET /free_drivers</h3>
+    <ul>
+        <li><strong>Description:</strong> Shows the list of free drivers in the UI.</li>
+    </ul>
+
+    <h3>GET /get_free_drivers</h3>
+    <ul>
+        <li><strong>Description:</strong> Retrieves all free drivers from the database.</li>
+    </ul>
+
+    <h3>GET /get_active_rides</h3>
+    <ul>
+        <li><strong>Description:</strong> Retrieves the list of active rides from the database.</li>
+    </ul>
+
+    <h3>GET /get_driver</h3>
+    <ul>
+        <li><strong>Description:</strong> Analyzes the database and retrieves a suitable driver.</li>
+    </ul>
+
+    <h3>POST /driver_sign_up</h3>
+    <ul>
+        <li><strong>Description:</strong> Adds a new driver to the system with the provided inputs.</li>
+        <li><strong>Sample JSON Input:</strong></li>
+    </ul>
+    <pre><code>{
+  "name": "Driver John",
+  "current_latitude": "40.7181",
+  "current_longitude": "-73.9647",
+  "on_ride": 0,
+  "price_km": "15.50"
+}</code></pre>
+
+    <h3>POST /create_ride</h3>
+    <ul>
+        <li><strong>Description:</strong> Creates a new ride and updates it in the database with the provided inputs.</li>
+        <li><strong>Sample JSON Input:</strong></li>
+    </ul>
+    <pre><code>{
+  "user_name": "Alice Johnson",
+  "pickup_latitude": "40.7128",
+  "pickup_longitude": "-74.0060",
+  "pickup_address": "123 Main St",
+  "dropoff_latitude": "40.7489",
+  "dropoff_longitude": "-73.9680",
+  "dropoff_address": "456 Elm St"
+}</code></pre>
+
+    <h3>POST /start_drive</h3>
+    <ul>
+        <li><strong>Description:</strong> Marks the ride as started and completed. This API is called from the UI with inputs.</li>
+    </ul>
+
+    <h3>POST /complete_ride</h3>
+    <ul>
+        <li><strong>Description:</strong> Marks the ride as completed and updates the driver's location. This API is called from the UI with inputs.</li>
+</ul>
+<p><strong>Note:</strong> Please ensure you have the necessary dependencies installed and the Flask app is running properly before using these APIs.</p>
+</body>
+</html>

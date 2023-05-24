@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ride Details</title>
+    <style>
+        .container {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    function refreshPage() {
+            location.reload();
+        }
+
+        // Function to update the form data
+        function updateFormData(rideData) {
+            document.getElementById('rider_name').value = rideData.rider_name;
+            document.getElementById('pickup_location').value = rideData.pickup_location;
+            document.getElementById('drop_location').value = rideData.drop_location;
+            document.getElementById('pickup_driver_name').value = rideData.pickup_driver_name;
+            document.getElementById('driver_location').value = rideData.driver_location;
+            document.getElementById('price_per_km').value = rideData.price_per_km;
+            document.getElementById('distance_from_rider').value = rideData.distance_from_rider;
+        }
+
+// Function to handle the button click event
+function handleButtonClick() {
+    var form = document.getElementById('rideForm');
+    var data = {
+        rider_name: document.getElementById('rider_name').value,
+        drop_location: document.getElementById('drop_location').value,
+        pickup_driver_name: document.getElementById('pickup_driver_name').value,
+
+<!--        driver_location: document.getElementById('driver_location').value,-->
+<!--        price_per_km: document.getElementById('price_per_km').value,-->
+<!--        distance_from_rider: document.getElementById('distance_from_rider').value-->
+    };
+    var requestData = JSON.stringify(data);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/start_drive", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Handle the response from the API if needed
+        }
+    };
+
+    xhr.send(requestData);
+}
+
+        // Fetch data from API and update the form
+        $(document).ready(function() {
+            $.get("/get_driver", function(data) {
+                updateFormData(data);
+            });
+
+            $("#updateRideButton").click(function() {
+                handleButtonClick();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Ride Details</h1>
+        <form id="rideForm" action="/start_drive" method="POST">
+            <label for="rider_name">Rider Name:</label>
+            <input type="text" id="rider_name" name="rider_name" readonly>
+
+            <label for="pickup_location">Pickup Location:</label>
+            <input type="text" id="pickup_location" name="pickup_location" readonly>
+
+            <label for="drop_location">Drop Location:</label>
+            <input type="text" id="drop_location" name="drop_location" readonly>
+
+            <label for="pickup_driver_name">Pickup Driver Name:</label>
+            <input type="text" id="pickup_driver_name" name="pickup_driver_name" readonly>
+
+            <label for="driver_location">Driver Location:</label>
+            <input type="text" id="driver_location" name="driver_location" readonly>
+
+            <label for="price_per_km">Price per Kilometer:</label>
+            <input type="text" id="price_per_km" name="price_per_km" readonly>
+
+            <label for="distance_from_rider">Distance from Rider:</label>
+            <input type="text" id="distance_from_rider" name="distance_from_rider" readonly>
+
+            <button type="button" id="updateRideButton" onclick="refreshPage()">Update Ride</button>
+
+        </form>
+    </div>
+
+</body>
+</html>

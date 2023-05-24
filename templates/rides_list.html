@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Active Rides</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Active Rides</h1>
+    <table id="activeRidesTable">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Driver Name</th>
+                <th>Pickup latitude</th>
+                <th>Pickup Address</th>
+                <th>Pickup longitude</th>
+                <th>Dropoff latitude</th>
+                <th>Dropoff longitude</th>
+                <th>Dropoff Address</th>
+                <th>Requested Time</th>
+                <th>Estimated Duration</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // Function to fetch rides and populate the table
+        function fetchRides() {
+            $.ajax({
+                url: "/get_active_rides",
+                dataType: "json",
+                contentType: "application/json",
+                success: function(data) {
+                // Check if data is an array
+                if (Array.isArray(data)) {
+                    // Iterate over the data and build table rows
+                    $("#activeRidesTable tbody").empty();
+                    data.forEach(function(ride) {
+                        var row = $("<tr></tr>");
+                        row.append("<td>" + ride.user_name + "</td>");
+                        row.append("<td>" + ride.name + "</td>");
+                        row.append("<td>" + ride.pickup_latitude + "</td>");
+                        row.append("<td>" + ride.pickup_longitude + "</td>");
+                        row.append("<td>" + ride.pickup_address + "</td>");
+                        row.append("<td>" + ride.dropoff_latitude + "</td>");
+                        row.append("<td>" + ride.dropoff_longitude + "</td>");
+                        row.append("<td>" + ride.dropoff_address + "</td>");
+                        row.append("<td>" + ride.requested_time + "</td>");
+                        row.append("<td>" + ride.estimated_duration + "</td>");
+
+                        // Create the "End Ride" button
+                        var button = $("<button>End Ride</button>");
+                        button.click(function() {
+                            endRide(ride);
+                        });
+                        var buttonCell = $("<td></td>").append(button);
+                        row.append(buttonCell);
+
+                        // Append the row to the table
+                        $("#activeRidesTable tbody").append(row);
+                    });
+                }
+             },
+                error: function(xhr, textStatus, errorThrown) {
+                    // Error handling
+                    console.error(xhr.status + ": " + xhr.statusText);
+                }
+
+            });
+        }
+
+// Function to end the ride
+function endRide(ride) {
+    // Create a new object with the desired fields
+    var dataToSend = {
+        user_name: ride.user_name,
+        name: ride.name,
+        dropoff_latitude: ride.dropoff_latitude,
+        dropoff_longitude: ride.dropoff_longitude
+    };
+
+    // Send a POST request to the /complete_ride endpoint with the filtered data
+    $.ajax({
+        url: "/complete_ride",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(dataToSend),
+        success: function(response) {
+            console.log(response); // Handle the response as needed
+            location.reload(); // Refresh the page
+        }
+    });
+}
+
+
+        $(document).ready(function() {
+            // Fetch rides on page load
+            fetchRides();
+
+            // Set interval to refresh rides every 10 seconds
+<!--            setInterval(fetchRides, 10000);-->
+
+});</script>
+
+</body>
+</html>

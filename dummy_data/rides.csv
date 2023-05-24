@@ -1,0 +1,11 @@
+user_name,pickup_latitude,pickup_longitude,pickup_address,dropoff_latitude,dropoff_longitude,dropoff_address
+Alice Johnson,40.7128,-74.0060,123 Main St,40.7489,-73.9680,456 Elm St
+Bob Smith,40.7306,-73.9352,789 Oak Ave,40.6979,-74.0369,321 Pine St
+Eva Davis,40.7223,-73.9878,987 Maple Rd,40.7395,-73.9887,654 Birch Ln
+Mark Thompson,40.7614,-73.9776,654 Elm St,40.7527,-73.9772,987 Maple Rd
+Lily Wilson,40.7527,-73.9772,321 Pine St,40.7644,-73.9857,789 Oak Ave
+Tom Anderson,40.7489,-73.9680,456 Elm St,40.7306,-73.9352,123 Main St
+Oliver Miller,40.7644,-73.9857,789 Oak Ave,40.7614,-73.9776,654 Elm St
+Sophia White,40.7395,-73.9887,654 Birch Ln,40.7223,-73.9878,987 Maple Rd
+Emma Wilson,40.6979,-74.0369,321 Pine St,40.7128,-74.0060,123 Main St
+Henry Taylor,40.7527,-73.9772,987 Maple Rd,40.7306,-73.9352,789 Oak Ave
