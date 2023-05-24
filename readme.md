@@ -2,6 +2,10 @@
 
 This Flask app is a clone of the Uber driver system. It provides a set of APIs for managing drivers, rides, and their status. Below you will find the details of the available endpoints and their functionalities.
 
+#### ```Python run_server.py```  for running the API server 
+#### ```Python upload_dummy_data.py``` for uploading dummy data
+#### please make sure that you configured the mysql db connection at ```config``` variable at ```utilities.py```
+
 ## Endpoints
 
 ### GET /check_db_connection
